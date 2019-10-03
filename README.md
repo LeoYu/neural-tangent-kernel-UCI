@@ -1,2 +1,24 @@
-# neural-tangent-kernel-UCI
-This is code for 
+# Performance of Nerual Tangent Kernel (NTK) on UCI datasets
+This is code for the UCI experiment in paper "Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks"
+## Prerequisites
+Python3, numpy, sklearn
+### Setup
+Download and decompress the pre-processed datasets used in paper "[Do we need hundreds of classifiers to solve real world classification problems?](http://jmlr.org/papers/volume15/delgado14a/delgado14a.pdf)" by running
+```
+bash setup.sh
+```
+## Running the tests
+```
+python UCI.py -max_tot N -max_dep dep -file output_file
+```
+Use option `-max_tot N` to skip datasets with samples size larger than `N`.
+
+Use option `-max_dep dep` to set the maximum depth allowed for neural tangent kernel.
+
+Use option `-file output_file` to set the output file.
+## Comparison
+Compare with other classifiers using results reported by "[Do we need hundreds of classifiers to solve real world classification problems?](http://jmlr.org/papers/volume15/delgado14a/delgado14a.pdf)" :
+- [Accuracy](http://persoal.citius.usc.es/manuel.fernandez.delgado/papers/jmlr/results.txt)
+- [Cohen's kappa](http://persoal.citius.usc.es/manuel.fernandez.delgado/papers/jmlr/results_kappa.csv)
+
+Details are listed in paper "Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks".
