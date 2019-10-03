@@ -11,9 +11,9 @@ bash setup.sh
 ```
 python UCI.py -max_tot N -max_dep dep -file output_file
 ```
-Use option `-max_tot N` to skip datasets with samples size larger than `N`.
+Use option `-max_tot N` to skip datasets with size larger than `N`.
 
-Use option `-max_dep dep` to set the maximum depth allowed for neural tangent kernel.
+Use option `-max_dep dep` to set the maximum depth allowed for NTK.
 
 Use option `-file output_file` to set the output file.
 ## Comparison
