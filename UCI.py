@@ -23,9 +23,8 @@ datadir = args.dir
 alg = tools.svm
 
 avg_acc_list = []
-avg_kappa_list = []
 outf = open(args.file, "w")
-print ("Dataset\tValidation Acc\tTest Acc\tTest Kappa", file = outf)
+print ("Dataset\tValidation Acc\tTest Acc", file = outf)
 for idx, dataset in enumerate(sorted(os.listdir(datadir))):
     if not os.path.isdir(datadir + "/" + dataset):
         continue
@@ -45,7 +44,7 @@ for idx, dataset in enumerate(sorted(os.listdir(datadir))):
     n_tot = n_train_val + n_test
     
     if n_tot > MAX_N_TOT or n_test > 0:
-        print (str(dataset) + '\t0\t0\t0', file = outf)
+        print (str(dataset) + '\t0\t0', file = outf)
         continue
     
     print (idx, dataset, "\tN:", n_tot, "\td:", d, "\tc:", c)
@@ -71,7 +70,7 @@ for idx, dataset in enumerate(sorted(os.listdir(datadir))):
         for fix_dep in range(dep + 1):
             K = Ks[dep][fix_dep]
             for value in C_LIST:
-                acc, kappa = alg(K[train_fold][:, train_fold], K[val_fold][:, train_fold], y[train_fold], y[val_fold], value, c)
+                acc = alg(K[train_fold][:, train_fold], K[val_fold][:, train_fold], y[train_fold], y[val_fold], value, c)
                 if acc > best_acc:
                     best_acc = acc
                     best_value = value
@@ -84,20 +83,17 @@ for idx, dataset in enumerate(sorted(os.listdir(datadir))):
     
     # 4-fold cross-validating
     avg_acc = 0.0
-    avg_kappa = 0.0
     fold = list(map(lambda x: list(map(int, x.split())), open("data/" + dataset + "/" + "conxuntos_kfold.dat", "r").readlines()))
     for repeat in range(4):
         train_fold, test_fold = fold[repeat * 2], fold[repeat * 2 + 1]
-        acc, kappa = alg(K[train_fold][:, train_fold], K[test_fold][:, train_fold], y[train_fold], y[test_fold], best_value, c)
+        acc = alg(K[train_fold][:, train_fold], K[test_fold][:, train_fold], y[train_fold], y[test_fold], best_value, c)
         avg_acc += 0.25 * acc
-        avg_kappa += 0.25 * kappa
         
-    print ("acc:", avg_acc, "\tkappa:", avg_kappa, "\n")
-    print (str(dataset) + '\t' + str(best_acc * 100) + '\t' + str(avg_acc * 100) + '\t' + str(avg_kappa * 100), file = outf)
+    print ("acc:", avg_acc, "\n")
+    print (str(dataset) + '\t' + str(best_acc * 100) + '\t' + str(avg_acc * 100), file = outf)
     avg_acc_list.append(avg_acc)
-    avg_kappa_list.append(avg_kappa)
 
-print ("avg_acc:", np.mean(avg_acc_list) * 100, "\tavg_kappa:", np.mean(avg_kappa_list) * 100)
+print ("avg_acc:", np.mean(avg_acc_list) * 100)
 outf.close()
 
     
