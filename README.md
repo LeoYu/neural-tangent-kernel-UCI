@@ -1,5 +1,5 @@
 # Performance of Nerual Tangent Kernel (NTK) on UCI datasets
-This is code for the UCI experiment in paper "Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks"
+This is code for the UCI experiment in paper "[Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks](https://arxiv.org/abs/1910.01663)"
 ## Prerequisites
 Python3, numpy, sklearn
 ### Setup
@@ -20,4 +20,4 @@ Use option `-file output_file` to set the output file.
 Compare with other classifiers using results reported by "[Do we need hundreds of classifiers to solve real world classification problems?](http://jmlr.org/papers/volume15/delgado14a/delgado14a.pdf)" from the link blow:
 - http://persoal.citius.usc.es/manuel.fernandez.delgado/papers/jmlr/results.txt
 
-Details are listed in paper "Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks".
+Details are listed in paper "[Harnessing the Power of Infinitely Wide Deep Nets on Small-data Tasks](https://arxiv.org/abs/1910.01663)".
